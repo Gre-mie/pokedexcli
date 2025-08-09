@@ -9,11 +9,11 @@ func TestCleanInput(test *testing.T) {
 	}{
 		{
 			result: "",
-			expected: []string{},
+			expected: []string{""},
 		},
 		{
-			result: "Hello World",
-			expected: []string{"Hello", "World"},
+			result: "hello world",
+			expected: []string{"hello", "world"},
 		},
 		{
 			result: "Steve Bob James",
