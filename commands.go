@@ -60,7 +60,7 @@ func mapForward(conf *config) error {
 		f.Println(err)
 		return err
 	}
-	setConfig(locations, conf)
+	setConfig(&locations, conf)
 	// testing ^^^
 
 	return nil

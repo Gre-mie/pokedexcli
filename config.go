@@ -7,12 +7,13 @@ type config struct {
 }
 
 type location struct {
-	name string `json:"name"`
-	url string `json:"url"`
+	Name string `json:"name"`
+	Url string `json:"url"`
 }
 
 type pageLocations struct {
-	next *string `json:"next"`				// can be null, dereference value
-	last *string `json:"previous"`			// can be null, dereference value
-	locations []location `json:"results"`
+	Count int `json:"count"`
+	Next *string `json:"next"`				// can be null, dereference value
+	Last *string `json:"previous"`			// can be null, dereference value
+	Locations []location `json:"results"`
 }
