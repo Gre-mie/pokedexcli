@@ -8,7 +8,7 @@ import (
 type Command struct {
 	name string
 	description string
-	command func() error
+	command func(*config) error
 }
 
 func getCommands() map[string]Command {
@@ -16,7 +16,7 @@ func getCommands() map[string]Command {
 		"exit": Command{
 			name: "exit",
 			description: "exits the program",
-			command: func() error {
+			command: func(conf *config) error {
 				f.Println("Closing the Pokedex... Goodbye!")
 				os.Exit(0)
 				return nil
@@ -42,7 +42,7 @@ func getCommands() map[string]Command {
 }
 
 // help - prints the manual for the programme
-func printManual() error {
+func printManual(conf *config) error {
 	f.Printf("Welcome to the Pokedex!\nUsage:\n\n")
 	commands := getCommands()
 	for key, _ := range commands {
@@ -52,13 +52,21 @@ func printManual() error {
 }
 
 // map - prints the next 20 locations
-func mapForward() error {
-	f.Println("--- map: print next 20 locations")
+func mapForward(conf *config) error {
+	
+	// testing vvv
+	_, err := getJSON("https://pokeapi.co/api/v2/location/", conf) // test
+	if err != nil {
+		f.Println(err)
+		return err
+	}
+	// testing ^^^
+
 	return nil
 }
 
 // map - prints the last 20 locations
-func mapBack() error {
+func mapBack(conf *config) error {
 	f.Println("--- mapb: print the last 20 locations")
 	return nil
 }
