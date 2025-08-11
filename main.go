@@ -17,11 +17,17 @@ func main() {
 		scanner.Scan()
 		input := cleanInput(scanner.Text())
 
-		switch input[0] {
+		comm := input[0]
+		switch comm {
 		case "exit":
-			commands["exit"].command()
+			commands[comm].command()
 		case "help":
-			err := commands["help"].command()
+			err := commands[comm].command()
+			if err != nil {
+				f.Errorf("%v", err)
+			}
+		case "map":
+			err := commands[comm].command()
 			if err != nil {
 				f.Errorf("%v", err)
 			}

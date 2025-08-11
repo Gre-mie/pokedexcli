@@ -13,11 +13,6 @@ type Command struct {
 
 func getCommands() map[string]Command {
 	return map[string]Command{
-		"help": Command{
-			name: "help",
-			description: "prints a help message describing how to use the REPL",
-			command: printManual,
-		},
 		"exit": Command{
 			name: "exit",
 			description: "exits the program",
@@ -27,6 +22,20 @@ func getCommands() map[string]Command {
 				return nil
 			},
 		},
+		"help": Command{
+			name: "help",
+			description: "prints a help message describing how to use the REPL",
+			command: printManual,
+		},
+		"map": Command{
+			name: "map",
+			description: "",
+			command: func() error {
+				f.Println("map command is running")
+				return nil
+			},
+		},
+
 	}
 }
 
