@@ -55,11 +55,12 @@ func printManual(conf *config) error {
 func mapForward(conf *config) error {
 	
 	// testing vvv
-	_, err := getJSON("https://pokeapi.co/api/v2/location/", conf) // test
+	locations, err := getJSON("https://pokeapi.co/api/v2/location-area/") // test
 	if err != nil {
 		f.Println(err)
 		return err
 	}
+	setConfig(locations, conf)
 	// testing ^^^
 
 	return nil
@@ -67,6 +68,18 @@ func mapForward(conf *config) error {
 
 // map - prints the last 20 locations
 func mapBack(conf *config) error {
-	f.Println("--- mapb: print the last 20 locations")
+	
+	// test vvv
+	_, err := getJSON("https://pokeapi.co/api/v2/location-area/") // test
+	if err != nil {
+		f.Println(err)
+		return err
+	}
+
+	// check if config.last is nil
+
+	// test ^^^
+
+
 	return nil
 }

@@ -14,29 +14,29 @@ func cleanInput(input string) []string {
 	return words
 }
 
+func setConfig(locations *pageLocations, conf *config) {
+	f.Printf("\tconfig:\nnext: %v\nlast: %v\n\tlocatuions:\nnext: %v\nlast: %v\nlocations:\n", conf.next, conf.last, locations.next, locations.last, locations.locations)
+}
+
 // retrieve json data 
-func getJSON(url string, conf *config) (data string, err error) {
+func getJSON(url string) (data *pageLocations, err error) {
+	data = &pageLocations{}
+
 	result, err := http.Get(url)
 	if err != nil {
-		return "", f.Errorf("Couldn't GET from url - %v", err)
+		return data, f.Errorf("Couldn't GET from url - %v", err)
 	}
-	if result.StatusCode < 200 && result.StatusCode >= 300 {
-		return "", f.Errorf("HTTP status code: %v - %v", result.StatusCode, err)
+	if result.StatusCode < 200 || result.StatusCode >= 300 {
+		return data, f.Errorf("HTTP status code: %v", result.StatusCode)
 	}
 	body, err := io.ReadAll(result.Body)
-	result.Body.Close()
+	defer result.Body.Close()
 	if err != nil {
-		return "", f.Errorf("io couldn't read result.Body - %v", err)
+		return data, f.Errorf("io couldn't read result.Body - %v", err)
 	}
-	err = json.Unmarshal(body, conf)
+	err = json.Unmarshal(body, &data)
 	if err != nil {
-		return "", f.Errorf("Couldn't convert json - %v", err)
+		return data, f.Errorf("Couldn't convert json - %v", err)
 	}
-
-
-
-	f.Println("--- yay its working - http.Get(url) all good :D")
-	f.Println(conf)
-
-	return "", nil // temp
+	return data, nil
 }
