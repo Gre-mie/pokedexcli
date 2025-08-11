@@ -31,6 +31,12 @@ func main() {
 			if err != nil {
 				f.Errorf("%v", err)
 			}
+		case "mapb":
+			err := commands[comm].command()
+			if err != nil {
+				f.Errorf("%v", err)
+			}
+
 		default:
 			f.Print("Unknown command\n")
 		}

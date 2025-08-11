@@ -29,21 +29,36 @@ func getCommands() map[string]Command {
 		},
 		"map": Command{
 			name: "map",
-			description: "",
-			command: func() error {
-				f.Println("map command is running")
-				return nil
-			},
+			description: "prints the next 20 locations",
+			command: mapForward,
+		},
+		"mapb": Command{
+			name: "mapb",
+			description: "prints the last 20 locations",
+			command: mapBack,
 		},
 
 	}
 }
 
+// help - prints the manual for the programme
 func printManual() error {
 	f.Printf("Welcome to the Pokedex!\nUsage:\n\n")
 	commands := getCommands()
 	for key, _ := range commands {
 		f.Printf("%v: %v\n", key, commands[key].description)
 	}
+	return nil
+}
+
+// map - prints the next 20 locations
+func mapForward() error {
+	f.Println("--- map: print next 20 locations")
+	return nil
+}
+
+// map - prints the last 20 locations
+func mapBack() error {
+	f.Println("--- mapb: print the last 20 locations")
 	return nil
 }
