@@ -1,11 +1,15 @@
 package main
 
+import (
+	"strings"
+)
+
 // split user input into words
-func cleanInput(text string) []string {
-	// check text != ""
-	// split the string by white space, fields?
+func cleanInput(input string) []string {
+	if input == "" {return []string{}}
+	clean := strings.Fields(input)
 	// lower case all elements in the array
-	//return the array
-	return []string{}
+	newarr := formatArr(clean, strings.ToLower)
+	return newarr
 }
 

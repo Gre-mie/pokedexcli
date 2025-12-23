@@ -3,14 +3,14 @@ package main
 import (
 	"testing"
 	"strings"
-	"fmt"
+		"fmt"
 )
 
 func format [Te any, Ta any] (name string, expected Te, actual Ta) string { 
 	return fmt.Sprintf(`
 test: %s
-	expected len: %v
-	actual len:   %v`, name, expected, actual)
+	expected: %v
+	actual:   %v`, name, expected, actual)
 }
 
 func TestCleanInput(t *testing.T) {
@@ -53,7 +53,8 @@ func TestCleanInput(t *testing.T) {
 			expected := test.output[i]
 			word := compare[i]
 			if strings.Compare(expected, word) != 0 {
-				t.Errorf(format(test.name, expected, word))
+				t.Errorf(format(test.name, test.output, compare))
+				break
 			}	
 		}
 	}
