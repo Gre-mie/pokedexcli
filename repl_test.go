@@ -2,8 +2,9 @@ package main
 
 import (
 	"testing"
-	"strings"
-		"fmt"
+	"reflect"
+//	"strings"
+	"fmt"
 )
 
 func format [Te any, Ta any] (name string, expected Te, actual Ta) string { 
@@ -43,20 +44,7 @@ func TestCleanInput(t *testing.T) {
 
 	for _, test := range testCases {
 		var compare []string = cleanInput(test.input)
-		if len(compare) != len(test.output) {
-			t.Errorf(format(test.name, len(test.output), len(compare)))
-			continue
-		}
-
-		// check arrays match
-		for i:=0; i<len(test.output); i++ {
-			expected := test.output[i]
-			word := compare[i]
-			if strings.Compare(expected, word) != 0 {
-				t.Errorf(format(test.name, test.output, compare))
-				break
-			}	
-		}
+			reflect.DeepEqual(compare, test.output)
 	}
 
 }
