@@ -14,6 +14,7 @@ test: %s
 	actual:   %v`, name, expected, actual)
 }
 
+// INFO: cleanInput should return an array of words from a string
 func TestCleanInput(t *testing.T) {
 	testCases := []struct{
 		name string
